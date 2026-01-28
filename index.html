@@ -12,16 +12,21 @@
         .swag-gradient { background: linear-gradient(135deg, #FF0080 0%, #7928CA 100%); }
         .text-swag { background: linear-gradient(135deg, #FF0080, #7928CA); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         
-        /* 跑馬燈：桌機終極慢速 80s */
+        /* 跑馬燈優化：解決空格與速度問題 */
         .marquee-bg { background: #facc15; color: #000; font-weight: 900; border-bottom: 2px solid #000; height: 48px; display: flex; align-items: center; overflow: hidden; position: sticky; top: 0; z-index: 50; }
         .marquee-container { width: 100%; white-space: nowrap; display: flex; align-items: center; }
-        .marquee-content { display: inline-block; animation: marquee 80s linear infinite; padding-left: 100%; flex-shrink: 0; }
-        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-400%); } }
+        .marquee-content { display: inline-block; animation: marquee 80s linear infinite; padding-left: 20%; flex-shrink: 0; }
+        
+        /* 網頁版位移：減少空格期 */
+        @keyframes marquee { 
+            0% { transform: translateX(0); } 
+            100% { transform: translateX(-150%); } 
+        }
 
-        /* 手機跑馬燈：單行 25s */
+        /* 手機版：強制單行與適當速度 */
         @media (max-width: 768px) {
-            .marquee-content { animation: marquee-mobile 25s linear infinite; font-size: 0.85rem; }
-            @keyframes marquee-mobile { 0% { transform: translateX(0); } 100% { transform: translateX(-500%); } }
+            .marquee-content { animation: marquee-mobile 25s linear infinite; font-size: 0.85rem; padding-left: 50%; }
+            @keyframes marquee-mobile { 0% { transform: translateX(0); } 100% { transform: translateX(-250%); } }
         }
 
         /* Header 視覺 */
@@ -39,11 +44,7 @@
         @media (max-width: 768px) { .content-container { padding: 0.75rem; } .desc-text { display: none; } }
         .desc-text { height: 4rem; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; margin-bottom: 1.5rem; font-size: 0.875rem; color: #d1d1d1; }
 
-        /* 時刻表樣式 */
-        .time-row { background: #111; border-left: 6px solid #FF0080; transition: 0.3s; }
-        .time-row:hover { background: #181818; }
-
-        /* 優惠卡片 */
+        /* 優惠方案票券設計 */
         .coupon-card { background: #111; border: 2px dashed #444; position: relative; transition: 0.3s; }
         .coupon-card::before, .coupon-card::after { content: ''; position: absolute; width: 20px; height: 20px; background: #000; border-radius: 50%; top: 50%; transform: translateY(-50%); }
         .coupon-card::before { left: -11px; } .coupon-card::after { right: -11px; }
@@ -112,7 +113,7 @@
                     <h3 class="font-black italic text-base md:text-xl mb-1 text-white">陳沂 <span class="text-zinc-500 text-[10px] md:text-xs font-normal">@happychampion</span></h3>
                     <p class="text-pink-500 text-[10px] font-bold mb-2 uppercase">#爭議女王</p>
                     <div class="desc-text text-zinc-300">2026 回歸首選！辛辣話題無下限。</div>
-                    <a href="https://sw-move.com/pjMkJ" target="_blank" class="cta-btn btn-shimmer mt-auto text-sm md:text-base">點我追蹤</a>
+                    <a href="https://sw-move.com/pjMkJ" target="_blank" class="cta-btn btn-shimmer mt-auto text-sm md:text-base">點我開看</a>
                 </div>
             </div>
             <div class="host-card">
