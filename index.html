@@ -12,12 +12,17 @@
         .swag-gradient { background: linear-gradient(135deg, #FF0080 0%, #7928CA 100%); }
         .text-swag { background: linear-gradient(135deg, #FF0080, #7928CA); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         
-        /* 跑馬燈：平穩速度 30s */
-        .marquee-bg { background: #facc15; color: #000; font-weight: 900; border-bottom: 2px solid #000; height: 44px; display: flex; align-items: center; overflow: hidden; }
-        .marquee-container { width: 100%; white-space: nowrap; }
-        .marquee-content { display: inline-block; animation: marquee 30s linear infinite; padding-left: 100%; }
-        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-280%); } }
-        .timer-box { background: #000; color: #facc15; padding: 0 4px; border-radius: 4px; margin: 0 2px; display: inline-block; min-width: 22px; text-align: center; }
+        /* 跑馬燈：桌機終極慢速 80s */
+        .marquee-bg { background: #facc15; color: #000; font-weight: 900; border-bottom: 2px solid #000; height: 48px; display: flex; align-items: center; overflow: hidden; position: sticky; top: 0; z-index: 50; }
+        .marquee-container { width: 100%; white-space: nowrap; display: flex; align-items: center; }
+        .marquee-content { display: inline-block; animation: marquee 80s linear infinite; padding-left: 100%; flex-shrink: 0; }
+        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-400%); } }
+
+        /* 手機跑馬燈：單行 25s */
+        @media (max-width: 768px) {
+            .marquee-content { animation: marquee-mobile 25s linear infinite; font-size: 0.85rem; }
+            @keyframes marquee-mobile { 0% { transform: translateX(0); } 100% { transform: translateX(-500%); } }
+        }
 
         /* Header 視覺 */
         .brand-text-clean { font-size: 4rem; line-height: 1; font-weight: 900; font-style: italic; color: #fff; letter-spacing: -1px; white-space: nowrap; }
@@ -25,7 +30,7 @@
         @media (max-width: 768px) { .brand-text-clean { font-size: 1.8rem; } .brand-logo-pure { height: 3.5rem; } }
         .sub-brand-text { background: linear-gradient(to bottom, #ffffff 0%, #a1a1aa 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 900; text-transform: uppercase; letter-spacing: 0.5em; font-style: italic; }
 
-        /* 主播卡片排版 */
+        /* 主播卡片 */
         .host-card { background: #121212; border: 1px solid #333; display: flex; flex-direction: column; height: 100%; border-radius: 1.5rem; overflow: hidden; transition: 0.4s; }
         .host-card:hover { transform: translateY(-12px); border-color: #FF0080; box-shadow: 0 20px 40px rgba(255, 0, 128, 0.3); }
         .image-container { width: 100%; aspect-ratio: 3 / 4; overflow: hidden; background-color: #222; }
@@ -38,34 +43,34 @@
         .time-row { background: #111; border-left: 6px solid #FF0080; transition: 0.3s; }
         .time-row:hover { background: #181818; }
 
-        /* 優惠票券視覺 */
+        /* 優惠卡片 */
         .coupon-card { background: #111; border: 2px dashed #444; position: relative; transition: 0.3s; }
         .coupon-card::before, .coupon-card::after { content: ''; position: absolute; width: 20px; height: 20px; background: #000; border-radius: 50%; top: 50%; transform: translateY(-50%); }
         .coupon-card::before { left: -11px; } .coupon-card::after { right: -11px; }
         .hot-badge { position: absolute; top: -10px; right: 15px; background: #facc15; color: #000; padding: 2px 10px; font-size: 10px; font-weight: 900; border-radius: 4px; transform: rotate(5deg); animation: blink 1s infinite alternate; z-index: 20; }
         @keyframes blink { from { opacity: 1; } to { opacity: 0.6; } }
 
-        /* 發光按鈕特效 */
+        /* 按鈕發光與流光特效 */
         .cta-btn { background: linear-gradient(135deg, #FF0080 0%, #7928CA 100%); color: white !important; font-weight: 900; padding: 1.1rem; border-radius: 0.75rem; text-align: center; position: relative; overflow: hidden; box-shadow: 0 0 15px rgba(255, 0, 128, 0.4); animation: soft-pulse 2s infinite; display: block; }
         @keyframes soft-pulse { 0%, 100% { transform: scale(1); box-shadow: 0 0 10px rgba(255, 0, 128, 0.4); } 50% { transform: scale(1.03); box-shadow: 0 0 25px rgba(255, 0, 128, 0.7); } }
         .btn-shimmer::after { content: ""; position: absolute; top: -50%; left: -100%; width: 100%; height: 200%; background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent); transform: rotate(45deg); animation: shimmer-effect 3s infinite; }
         @keyframes shimmer-effect { 0% { left: -100%; } 100% { left: 200%; } }
 
         .cal-link { font-size: 0.75rem; color: #facc15; border: 1px solid #facc15; padding: 2px 8px; border-radius: 99px; transition: 0.3s; margin-top: 4px; display: inline-block; }
-        .cal-link:hover { background: #facc15; color: #000; }
+        .timer-box { background: #000; color: #facc15; padding: 0 4px; border-radius: 4px; margin: 0 2px; display: inline-block; min-width: 24px; text-align: center; }
     </style>
 </head>
 <body>
 
-    <div class="marquee-bg sticky top-0 z-50 shadow-xl">
+    <div class="marquee-bg shadow-xl">
         <div class="marquee-container">
-            <div class="marquee-content uppercase text-sm md:text-lg" id="timer-display">
+            <div class="marquee-content uppercase" id="timer-display">
                 ⚠️ 狂新聞粉絲專屬優惠 剩餘時間：
                 <span class="timer-box" id="days">00</span>天 
                 <span class="timer-box" id="hours">00</span>時 
                 <span class="timer-box" id="minutes">00</span>分 
                 <span class="timer-box" id="seconds">00</span>秒 
-                ⚠️ 主播內內、小映、陳沂、Kimmy 在線等你 ⚠️ 活動 3/8 截止 ⚠️
+                ⚠️ 主播內內、小映、陳沂、Kimmy 在線等你 ⚠️ 活動於 2026/03/08 23:59 正式截止 ⚠️
             </div>
         </div>
     </div>
@@ -86,7 +91,7 @@
             <div class="host-card">
                 <div class="image-container relative"><img src="https://pub-b817e22edf6447beb72ee04f1adf2d70.r2.dev/neinei.jpg"><div class="absolute top-2 right-2 bg-black/70 px-2 py-0.5 rounded text-yellow-400 text-[9px] font-bold uppercase">全裸誘惑</div></div>
                 <div class="content-container">
-                    <h3 class="font-black italic text-base md:text-xl mb-1">內內 <span class="text-zinc-500 text-[10px] md:text-xs">@Neinei_chen</span></h3>
+                    <h3 class="font-black italic text-base md:text-xl mb-1 text-white">內內 <span class="text-zinc-500 text-[10px] md:text-xs font-normal">@Neinei_chen</span></h3>
                     <p class="text-pink-500 text-[10px] font-bold mb-2 uppercase">#外流輔導長</p>
                     <div class="desc-text text-zinc-300">影片外流事件主角，SWAG 話題天花板。</div>
                     <a href="https://lihi3.me/GgGda" target="_blank" class="cta-btn btn-shimmer mt-auto text-sm md:text-base">私訊特價中</a>
@@ -95,16 +100,16 @@
             <div class="host-card">
                 <div class="image-container relative"><img src="https://pub-b817e22edf6447beb72ee04f1adf2d70.r2.dev/ruan_ccc.jpg"><div class="absolute top-2 right-2 bg-black/70 px-2 py-0.5 rounded text-yellow-400 text-[9px] font-bold uppercase">火辣內衣</div></div>
                 <div class="content-container">
-                    <h3 class="font-black italic text-base md:text-xl mb-1">小映 <span class="text-zinc-500 text-[10px] md:text-xs">@ruan.ccc</span></h3>
+                    <h3 class="font-black italic text-base md:text-xl mb-1 text-white">小映 <span class="text-zinc-500 text-[10px] md:text-xs font-normal">@ruan.ccc</span></h3>
                     <p class="text-pink-500 text-[10px] font-bold mb-2 uppercase">#大巨蛋脫衣</p>
-                    <div class="desc-text text-zinc-300">看球現場脫衣引發全網瘋傳，身材極度火辣。</div>
+                    <div class="desc-text text-zinc-300">看球現場脫衣引發全網瘋傳，身材極度火爆。</div>
                     <a href="https://sw-move.com/y7kjv" target="_blank" class="cta-btn btn-shimmer mt-auto text-sm md:text-base">解鎖限動</a>
                 </div>
             </div>
             <div class="host-card">
                 <div class="image-container relative"><img src="https://pub-b817e22edf6447beb72ee04f1adf2d70.r2.dev/happychampion.jpg"><div class="absolute top-2 right-2 bg-black/70 px-2 py-0.5 rounded text-yellow-400 text-[9px] font-bold uppercase">嘴巴最辣</div></div>
                 <div class="content-container">
-                    <h3 class="font-black italic text-base md:text-xl mb-1">陳沂 <span class="text-zinc-500 text-[10px] md:text-xs">@happychampion</span></h3>
+                    <h3 class="font-black italic text-base md:text-xl mb-1 text-white">陳沂 <span class="text-zinc-500 text-[10px] md:text-xs font-normal">@happychampion</span></h3>
                     <p class="text-pink-500 text-[10px] font-bold mb-2 uppercase">#爭議女王</p>
                     <div class="desc-text text-zinc-300">2026 回歸首選！辛辣話題無下限。</div>
                     <a href="https://sw-move.com/pjMkJ" target="_blank" class="cta-btn btn-shimmer mt-auto text-sm md:text-base">點我開看</a>
@@ -113,7 +118,7 @@
             <div class="host-card">
                 <div class="image-container relative"><img src="https://pub-b817e22edf6447beb72ee04f1adf2d70.r2.dev/kimmy_ilove.jpg"><div class="absolute top-2 right-2 bg-black/70 px-2 py-0.5 rounded text-yellow-400 text-[9px] font-bold uppercase">真的沒極限</div></div>
                 <div class="content-container">
-                    <h3 class="font-black italic text-base md:text-xl mb-1">Kimmy <span class="text-zinc-500 text-[10px] md:text-xs">@kimmy_ilove</span></h3>
+                    <h3 class="font-black italic text-base md:text-xl mb-1 text-white">Kimmy <span class="text-zinc-500 text-[10px] md:text-xs font-normal">@kimmy_ilove</span></h3>
                     <p class="text-pink-500 text-[10px] font-bold mb-2 uppercase">#遺體化妝師</p>
                     <div class="desc-text text-zinc-300">14 年遺體化妝師轉職，反差好奇心爆表。</div>
                     <a href="https://sw-move.com/1boXX" target="_blank" class="cta-btn btn-shimmer mt-auto text-sm md:text-base">指令控制她</a>
@@ -122,20 +127,20 @@
         </div>
 
         <h2 class="text-2xl md:text-3xl font-black mb-12 text-center italic tracking-widest uppercase text-yellow-400">📅 主播開播時刻表</h2>
-        <div class="max-w-3xl mx-auto space-y-4 mb-24 px-2">
-            <div class="time-row p-5 md:p-6 rounded-2xl flex justify-between items-center border-pink-500">
+        <div class="max-w-3xl mx-auto space-y-4 mb-24 px-2 text-left">
+            <div class="time-row p-5 md:p-6 rounded-2xl flex justify-between items-center border-l-8 border-pink-500">
                 <div><span class="font-black md:text-lg text-white">內內 @Neinei_chen</span><br><span class="text-zinc-400 text-xs">每週二、三</span></div>
                 <div class="text-right"><div class="font-black text-pink-500 md:text-xl text-lg">21:00-00:00</div><a href="https://www.google.com/calendar/render?action=TEMPLATE&text=內內+@SWAG+直播&dates=20260303T210000Z/20260303T235959Z" target="_blank" class="cal-link">🔔 提醒我</a></div>
             </div>
-            <div class="time-row p-5 md:p-6 rounded-2xl flex justify-between items-center border-purple-500" style="border-left-color: #7928CA;">
+            <div class="time-row p-5 md:p-6 rounded-2xl flex justify-between items-center border-l-8 border-purple-500">
                 <div><span class="font-black md:text-lg text-white">小映 @ruan.ccc</span><br><span class="text-zinc-400 text-xs">每週四、五</span></div>
                 <div class="text-right"><div class="font-black text-purple-500 md:text-xl text-lg">20:00-22:00</div><a href="https://www.google.com/calendar/render?action=TEMPLATE&text=小映+@SWAG+直播&dates=20260305T200000Z/20260305T220000Z" target="_blank" class="cal-link">🔔 提醒我</a></div>
             </div>
-            <div class="time-row p-5 md:p-6 rounded-2xl flex justify-between items-center border-red-600" style="border-left-color: #dc2626;">
+            <div class="time-row p-5 md:p-6 rounded-2xl flex justify-between items-center border-l-8 border-red-600">
                 <div><span class="font-black md:text-lg text-white">陳沂 @happychampion</span><br><span class="text-zinc-400 text-xs">每週一</span></div>
                 <div class="text-right"><div class="font-black text-red-600 md:text-xl text-lg">21:00-22:30</div><a href="https://www.google.com/calendar/render?action=TEMPLATE&text=陳沂+@SWAG+直播&dates=20260302T210000Z/20260302T223000Z" target="_blank" class="cal-link">🔔 提醒我</a></div>
             </div>
-            <div class="time-row p-5 md:p-6 rounded-2xl flex justify-between items-center border-yellow-400" style="border-left-color: #facc15;">
+            <div class="time-row p-5 md:p-6 rounded-2xl flex justify-between items-center border-l-8 border-yellow-400">
                 <div><span class="font-black md:text-lg text-white">Kimmy @kimmy_ilove</span><br><span class="text-zinc-400 text-xs">每週六、日</span></div>
                 <div class="text-right"><div class="font-black text-yellow-400 md:text-xl text-lg">15:00-17:00</div><a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Kimmy+@SWAG+直播&dates=20260307T150000Z/20260307T170000Z" target="_blank" class="cal-link">🔔 提醒我</a></div>
             </div>
@@ -143,26 +148,18 @@
 
         <h2 class="text-2xl md:text-3xl font-black mb-12 text-center italic tracking-widest uppercase"><span class="text-swag">💰 狂粉專屬優惠方案</span></h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24 px-2">
-            <div class="coupon-card p-8 rounded-lg"><div class="hot-badge">9487 必看</div><h3 class="text-xl font-black text-white italic mb-4">私密對談</h3><p class="text-zinc-400 text-sm border-t border-zinc-800 pt-4">限時 <span class="text-pink-500 font-bold">低鑽</span> 私訊主播，真人互動。</p></div>
-            <div class="coupon-card p-8 rounded-lg"><div class="hot-badge" style="background: #FF0080; color: #fff;">限量解鎖</div><h3 class="text-xl font-black text-white italic mb-4">骨折價限動</h3><p class="text-zinc-400 text-sm border-t border-zinc-800 pt-4">解鎖那些妳不該看、但 <span class="text-pink-500 font-bold">很想看</span> 的內容。</p></div>
-            <div class="coupon-card p-8 rounded-lg"><div class="hot-badge" style="background: #fff; color: #000;">福利最高</div><h3 class="text-xl font-black text-white italic mb-4">密語領片</h3><p class="text-zinc-400 text-sm border-t border-zinc-800 pt-4">私訊主播輸入「<span class="text-yellow-400 font-bold">9487</span>」，立刻領取私密影片。</p></div>
+            <div class="coupon-card p-8 rounded-lg"><div class="hot-badge">9487 必看</div><h3 class="text-xl font-black text-white italic mb-4 uppercase">私密對談</h3><p class="text-zinc-400 text-sm border-t border-zinc-800 pt-4 leading-relaxed">限時 <span class="text-pink-500 font-bold">低鑽</span> 私訊主播，真人互動。</p></div>
+            <div class="coupon-card p-8 rounded-lg"><div class="hot-badge" style="background: #FF0080; color: #fff;">限量解鎖</div><h3 class="text-xl font-black text-white italic mb-4 uppercase">骨折價限動</h3><p class="text-zinc-400 text-sm border-t border-zinc-800 pt-4 leading-relaxed">解鎖那些妳不該看、但 <span class="text-pink-500 font-bold">很想看</span> 的內容。</p></div>
+            <div class="coupon-card p-8 rounded-lg"><div class="hot-badge" style="background: #fff; color: #000;">福利最高</div><h3 class="text-xl font-black text-white italic mb-4 uppercase">密語領片</h3><p class="text-zinc-400 text-sm border-t border-zinc-800 pt-4 leading-relaxed">私訊主播輸入「<span class="text-yellow-400 font-bold">9487</span>」，立刻領取私密影片。</p></div>
         </div>
     </main>
 
-    <section class="bg-white text-black py-24 px-6 text-center">
+    <section class="bg-white text-black py-20 px-4 text-center">
         <div class="max-w-5xl mx-auto">
-            <h2 class="text-4xl md:text-6xl font-black mb-16 italic tracking-tighter uppercase">別 9487 了，快點加入SWAG！</h2>
+            <h2 class="text-4xl md:text-5xl font-black mb-16 italic tracking-tighter uppercase leading-tight">別 9487 了，快點加入SWAG！</h2>
             <div class="flex flex-col md:flex-row justify-center gap-8">
-                <div class="flex-1">
-                    <a href="https://sw-move.com/oyV1X" target="_blank" class="cta-btn btn-shimmer w-full bg-black text-white py-8 rounded-3xl text-3xl font-black shadow-2xl relative">
-                        新手禮包 <span class="text-yellow-400">超低價</span> 入手
-                    </a>
-                </div>
-                <div class="flex-1">
-                    <a href="https://swa9.xyz/sZWvc" target="_blank" class="cta-btn btn-shimmer w-full swag-gradient text-white py-8 rounded-3xl text-3xl font-black shadow-2xl relative">
-                        狂新聞 主播專區
-                    </a>
-                </div>
+                <div class="flex-1"><a href="https://sw-move.com/oyV1X" target="_blank" class="cta-btn btn-shimmer w-full bg-black text-white py-8 rounded-3xl text-2xl font-black shadow-2xl relative">新手禮包 <span class="text-yellow-400 font-bold underline">超低價</span> 入手</a></div>
+                <div class="flex-1"><a href="https://swa9.xyz/sZWvc" target="_blank" class="cta-btn btn-shimmer w-full swag-gradient text-white py-8 rounded-3xl text-2xl font-black shadow-2xl relative">狂新聞 主播專區</a></div>
             </div>
         </div>
     </section>
@@ -172,7 +169,6 @@
     </footer>
 
     <script>
-        // 設定目標時間：2026年3月8日 23:59:59
         const targetTime = new Date("March 8, 2026 23:59:59").getTime();
         const timerUpdate = setInterval(() => {
             const now = new Date().getTime();
