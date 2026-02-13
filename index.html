@@ -12,7 +12,7 @@
         .swag-gradient { background: linear-gradient(135deg, #FF0080 0%, #7928CA 100%); }
         .text-swag { background: linear-gradient(135deg, #FF0080, #7928CA); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         
-        /* 跑馬燈 */
+        /* 跑馬燈：桌機慢速 80s，手機單行 */
         .marquee-bg { background: #facc15; color: #000; font-weight: 900; border-bottom: 2px solid #000; height: 48px; display: flex; align-items: center; overflow: hidden; position: sticky; top: 0; z-index: 50; }
         .marquee-container { width: 100%; white-space: nowrap; display: flex; align-items: center; }
         .marquee-content { display: inline-block; animation: marquee 80s linear infinite; padding-left: 20%; flex-shrink: 0; }
@@ -34,7 +34,7 @@
         .host-card:hover { transform: translateY(-12px); border-color: #FF0080; box-shadow: 0 20px 40px rgba(255, 0, 128, 0.3); }
         .image-container { width: 100%; aspect-ratio: 3 / 4; overflow: hidden; background-color: #222; }
         .image-container img { width: 100%; height: 100%; object-fit: cover; }
-        .content-container { padding: 1.25rem; display: flex; flex-direction: column; flex-grow: 1; gap: 0.5rem; }
+        .content-container { padding: 1.25rem; display: flex; flex-direction: column; flex-grow: 1; gap: 0.75rem; }
         @media (max-width: 768px) { .content-container { padding: 0.75rem; } .host-card { border-radius: 1rem; } }
 
         /* 時刻表樣式 */
@@ -44,35 +44,15 @@
         .cal-link:hover { background: #facc15; color: #000; }
         .live-btn-sm { background: #FF0080; color: #fff; font-size: 0.75rem; font-weight: 900; padding: 4px 12px; border-radius: 99px; white-space: nowrap; display: inline-block; animation: soft-pulse 2s infinite; }
 
-        /* --- 修正：標籤字體加大 --- */
-        .hot-badge-large { 
-            position: absolute; 
-            top: -12px; 
-            right: 15px; 
-            background: #facc15; 
-            color: #000; 
-            padding: 6px 14px; /* 加大內距 */
-            font-size: 14px; /* 字體加大 */
-            font-weight: 900; 
-            border-radius: 6px; 
-            transform: rotate(3deg); 
-            animation: blink 1s infinite alternate; 
-            z-index: 20;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-        }
-        
-        .coupon-card { 
-            background: #111; border: 2px dashed #444; position: relative; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: pointer;
-        }
+        /* 優惠方案標籤加大 */
+        .hot-badge-large { position: absolute; top: -12px; right: 15px; background: #facc15; color: #000; padding: 6px 14px; font-size: 14px; font-weight: 900; border-radius: 6px; transform: rotate(3deg); animation: blink 1s infinite alternate; z-index: 20; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+        .coupon-card { background: #111; border: 2px dashed #444; position: relative; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: pointer; }
         .coupon-card:hover { transform: translateY(-10px); border-color: #FF0080; background: #1a1a1a; box-shadow: 0 15px 35px rgba(255, 0, 128, 0.3); }
         .coupon-card::before, .coupon-card::after { content: ''; position: absolute; width: 20px; height: 20px; background: #000; border-radius: 50%; top: 50%; transform: translateY(-50%); }
         .coupon-card::before { left: -11px; } .coupon-card::after { right: -11px; }
 
-        /* 按鈕特效 */
-        .cta-btn { background: linear-gradient(135deg, #FF0080 0%, #7928CA 100%); color: white !important; font-weight: 900; padding: 0.8rem; border-radius: 0.6rem; text-align: center; position: relative; overflow: hidden; animation: soft-pulse 2s infinite; display: block; font-size: 0.9rem; }
-        .follow-btn { border: 1px solid #555; color: #ccc; font-weight: 700; padding: 0.6rem; border-radius: 0.6rem; text-align: center; display: block; font-size: 0.8rem; transition: 0.3s; }
-        .follow-btn:hover { border-color: #fff; color: #fff; background: rgba(255,255,255,0.1); }
-        
+        /* 按鈕與動畫 */
+        .cta-btn { background: linear-gradient(135deg, #FF0080 0%, #7928CA 100%); color: white !important; font-weight: 900; padding: 0.8rem; border-radius: 0.6rem; text-align: center; position: relative; overflow: hidden; animation: soft-pulse 2s infinite; display: block; font-size: 0.95rem; }
         @keyframes soft-pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
         @keyframes blink { from { opacity: 1; transform: rotate(3deg) scale(1); } to { opacity: 0.8; transform: rotate(3deg) scale(1.05); } }
         .btn-shimmer::after { content: ""; position: absolute; top: -50%; left: -100%; width: 100%; height: 200%; background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2), transparent); transform: rotate(45deg); animation: shimmer-effect 3s infinite; }
@@ -112,32 +92,28 @@
                 <div class="image-container relative"><img src="https://pub-b817e22edf6447beb72ee04f1adf2d70.r2.dev/neinei.jpg"><div class="absolute top-2 right-2 bg-black/70 px-2 py-0.5 rounded text-yellow-400 text-[9px] font-bold uppercase">熱議輔導長</div></div>
                 <div class="content-container">
                     <h3 class="font-black italic text-base md:text-xl text-white">內內 <span class="text-zinc-500 text-[10px] md:text-xs font-normal">@neinei_chen</span></h3>
-                    <a href="https://lihi3.me/GgGda" target="_blank" class="cta-btn btn-shimmer">私訊特價中</a>
-                    <a href="https://lihi3.me/GgGda" target="_blank" class="follow-btn">點我追蹤主播</a>
+                    <a href="https://lihi3.me/GgGda" target="_blank" class="cta-btn btn-shimmer mt-auto">私訊特價中</a>
                 </div>
             </div>
             <div class="host-card">
                 <div class="image-container relative"><img src="https://pub-b817e22edf6447beb72ee04f1adf2d70.r2.dev/ruan_ccc.jpg"><div class="absolute top-2 right-2 bg-black/70 px-2 py-0.5 rounded text-yellow-400 text-[9px] font-bold uppercase">大巨蛋女孩</div></div>
                 <div class="content-container">
                     <h3 class="font-black italic text-base md:text-xl text-white">小映 <span class="text-zinc-500 text-[10px] md:text-xs font-normal">@ruan.ccc</span></h3>
-                    <a href="https://sw-move.com/y7kjv" target="_blank" class="cta-btn btn-shimmer">解鎖限動</a>
-                    <a href="https://sw-move.com/y7kjv" target="_blank" class="follow-btn">點我追蹤主播</a>
+                    <a href="https://sw-move.com/y7kjv" target="_blank" class="cta-btn btn-shimmer mt-auto">解鎖限動</a>
                 </div>
             </div>
             <div class="host-card">
                 <div class="image-container relative"><img src="https://pub-b817e22edf6447beb72ee04f1adf2d70.r2.dev/happychampion.jpg"><div class="absolute top-2 right-2 bg-black/70 px-2 py-0.5 rounded text-yellow-400 text-[9px] font-bold uppercase">爭議女王</div></div>
                 <div class="content-container">
                     <h3 class="font-black italic text-base md:text-xl text-white">陳沂 <span class="text-zinc-500 text-[10px] md:text-xs font-normal">@happychampion</span></h3>
-                    <a href="https://sw-move.com/pjMkJ" target="_blank" class="cta-btn btn-shimmer">解鎖私密</a>
-                    <a href="https://sw-move.com/pjMkJ" target="_blank" class="follow-btn">點我追蹤主播</a>
+                    <a href="https://sw-move.com/pjMkJ" target="_blank" class="cta-btn btn-shimmer mt-auto">解鎖私密</a>
                 </div>
             </div>
             <div class="host-card">
                 <div class="image-container relative"><img src="https://pub-b817e22edf6447beb72ee04f1adf2d70.r2.dev/stellajs.jpg"><div class="absolute top-2 right-2 bg-black/70 px-2 py-0.5 rounded text-yellow-400 text-[9px] font-bold uppercase">超狂反差</div></div>
                 <div class="content-container">
                     <h3 class="font-black italic text-base md:text-xl text-white">葡萄 <span class="text-zinc-500 text-[10px] md:text-xs font-normal">@stellajs</span></h3>
-                    <a href="https://sw-move.com/1boXX" target="_blank" class="cta-btn btn-shimmer">指令控制她</a>
-                    <a href="https://sw-move.com/1boXX" target="_blank" class="follow-btn">點我追蹤主播</a>
+                    <a href="https://sw-move.com/1boXX" target="_blank" class="cta-btn btn-shimmer mt-auto">指令控制她</a>
                 </div>
             </div>
         </div>
@@ -191,23 +167,17 @@
             <div class="coupon-card p-10 rounded-lg text-center">
                 <div class="hot-badge-large">限時 50% 特價</div>
                 <h3 class="text-xl font-black text-white italic mb-4 uppercase">私密對談</h3>
-                <p class="text-zinc-400 text-sm border-t border-zinc-800 pt-6 leading-relaxed">
-                    限時 <span class="text-pink-500 font-bold">低鑽</span> 私訊主播，真人互動，把妳想說的都告訴她。
-                </p>
+                <p class="text-zinc-400 text-sm border-t border-zinc-800 pt-6 leading-relaxed">限時 <span class="text-pink-500 font-bold">低鑽</span> 私訊主播，真人互動，把妳想說的都告訴她。</p>
             </div>
             <div class="coupon-card p-10 rounded-lg text-center">
                 <div class="hot-badge-large" style="background: #FF0080; color: #fff;">台幣5塊不到</div>
                 <h3 class="text-xl font-black text-white italic mb-4 uppercase">骨折價限動</h3>
-                <p class="text-zinc-400 text-sm border-t border-zinc-800 pt-6 leading-relaxed">
-                    解鎖那些妳不該看、但 <span class="text-pink-500 font-bold">很想看</span> 的私密內容。
-                </p>
+                <p class="text-zinc-400 text-sm border-t border-zinc-800 pt-6 leading-relaxed">60鑽解鎖那些妳不該看、但 <span class="text-pink-500 font-bold">很想看</span> 的私密內容。</p>
             </div>
             <div class="coupon-card p-10 rounded-lg text-center">
                 <div class="hot-badge-large" style="background: #fff; color: #000;">狂新聞粉絲獨家</div>
                 <h3 class="text-xl font-black text-white italic mb-4 uppercase">密語領片</h3>
-                <p class="text-zinc-400 text-sm border-t border-zinc-800 pt-6 leading-relaxed">
-                    私訊主播輸入通關密語「<span class="text-yellow-400 font-bold text-lg">9487</span>」，立刻領取私密影片好禮。
-                </p>
+                <p class="text-zinc-400 text-sm border-t border-zinc-800 pt-6 leading-relaxed">私訊主播輸入通關密語「<span class="text-yellow-400 font-bold text-lg">9487</span>」，立刻領取私密影片好禮。</p>
             </div>
         </div>
     </main>
@@ -216,16 +186,8 @@
         <div class="max-w-5xl mx-auto">
             <h2 class="text-3xl md:text-5xl font-black mb-16 italic tracking-tighter uppercase leading-tight">別 9487 了，快點加入SWAG！</h2>
             <div class="flex flex-col md:flex-row justify-center gap-8">
-                <div class="flex-1">
-                    <a href="https://sw-move.com/oyV1X" target="_blank" class="cta-btn btn-shimmer w-full bg-black text-white py-8 rounded-3xl text-2xl font-black shadow-2xl relative">
-                        新手禮包 <span class="text-yellow-400 font-bold underline">超低價</span> 入手
-                    </a>
-                </div>
-                <div class="flex-1">
-                    <a href="https://swa9.xyz/sZWvc" target="_blank" class="cta-btn btn-shimmer w-full swag-gradient text-white py-8 rounded-3xl text-2xl font-black shadow-2xl relative">
-                        狂新聞 主播專區
-                    </a>
-                </div>
+                <div class="flex-1"><a href="https://sw-move.com/oyV1X" target="_blank" class="cta-btn btn-shimmer w-full bg-black text-white py-8 rounded-3xl text-2xl font-black shadow-2xl relative">新手禮包 <span class="text-yellow-400 font-bold underline">超低價</span> 入手</a></div>
+                <div class="flex-1"><a href="https://swa9.xyz/sZWvc" target="_blank" class="cta-btn btn-shimmer w-full swag-gradient text-white py-8 rounded-3xl text-2xl font-black shadow-2xl relative">狂新聞 主播專區</a></div>
             </div>
         </div>
     </section>
